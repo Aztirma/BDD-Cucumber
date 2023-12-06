@@ -2,13 +2,19 @@
 
 Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
-    # each returned element will be a hash whose key is the table header.
-    # you should arrange to add that movie to the database here.
+    Movie.create movie
   end
-  pending "Fill in this step in movie_steps.rb"
 end
 
 Then /(.*) seed movies should exist/ do | n_seeds |
+    n_seeds
+    p1 = (page.body =~ /#{e1}/)
+    p2 = (page.body =~ /#{e2}/)
+  
+    assert p1, "Page does not contain #{e1}"
+    assert p2, "Page does not contain #{e2}"
+    assert p1 < p2, "#{e1} occurs at #{p1}, #{e2} occurs at #{p2}"
+
   expect(Movie.count).to eq n_seeds.to_i
 end
 
